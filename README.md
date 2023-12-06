@@ -9,23 +9,33 @@ Aplicación API en Node JS junto a base de datos Mongo DB y una web para interac
 
 ## Contenedores
 ### Contenedores
-![containers](images/containers.png)
+<p align="center">
+  <img src="images/containers.png"/>
+</p>
 Panorama general que muestra todos los contenedores en interacción.
 
 ### 1. Contenedor Mongo
-![mongo_container](images/mongo_container.png)
+<p align="center">
+  <img src="images/mongo_container.png"/>
+</p>
 Visualización del contenedor de MongoDB, una parte integral del sistema.
 
 ### 2. Contenedor API
-![api_container](images/api_container.png)
+<p align="center">
+  <img src="images/api_container.png"/>
+</p>
 Imagen representativa del contenedor API.
 
 ### 3. Contenedor web (Nginx)
-![nginx_container](images/nginx_container.png)
+<p align="center">
+  <img src="images/nginx_container.png"/>
+</p>
 Representación visual del contenedor Nginx, crucial para el funcionamiento fluido del proyecto.
 
 ## Postman
-![postman](images/postman.png)
+<p align="center">
+  <img src="images/postman.png"/>
+</p>
 Captura de Postman para ilustrar la interacción con la API. La colección viene incluida en el proyecto.
 
 ## Web

@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # MongoDB
+  mongo:
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    container_name: mongo_container
+
+  # API Node.js
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    container_name: api_container
+
+  # Nginx para web
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    container_name: nginx_container
+
+volumes:
+  mongodata:

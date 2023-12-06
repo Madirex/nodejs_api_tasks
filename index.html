@@ -3,42 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TO-DO List</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-
-    #tasksContainer {
-      max-width: 600px;
-      margin: 20px auto;
-    }
-
-    .task {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .task button {
-      margin-left: 10px;
-    }
-
-    .completed {
-      text-decoration: line-through;
-    }
-  </style>
+  <title>Task List</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="js/script.js" defer></script>
 </head>
 <body>
 
 <div id="tasksContainer">
-  <h2>TO-DO List</h2>
-
-  <!-- Nuevo formulario para agregar tareas -->
+  <h2>Task List</h2>
   <form id="addTaskForm">
     <label for="taskName">Nombre de la tarea:</label>
     <input type="text" id="taskName" required>
@@ -48,107 +20,7 @@
 
     <button type="submit">Agregar Tarea</button>
   </form>
-
   <div id="tasksListContainer"></div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tasksListContainer = document.getElementById('tasksListContainer');
-  
-    // Función para cargar y mostrar las tareas desde la API
-    const loadTasks = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/tasks');
-        const tasks = await response.json();
-  
-        // Limpiar el contenedor antes de agregar las tareas
-        tasksListContainer.innerHTML = '';
-  
-        tasks.forEach(task => {
-          const taskElement = createTaskElement(task);
-          tasksListContainer.appendChild(taskElement);
-        });
-      } catch (error) {
-        console.error('Error al cargar las tareas:', error);
-      }
-    };
-  
-    // Función para crear un elemento de tarea
-    const createTaskElement = (task) => {
-      const taskElement = document.createElement('div');
-      taskElement.className = `task ${task.isFinished ? 'completed' : ''}`;
-      taskElement.innerHTML = `
-        <span>${task.name}: ${task.description}</span>
-        <button onclick="deleteTask('${task._id}')">Eliminar</button>
-        <button onclick="completeTask('${task._id}', ${task.isFinished})">Completar</button>
-      `;
-      return taskElement;
-    };
-  
-    // Función para agregar una nueva tarea
-    document.getElementById('addTaskForm').addEventListener('submit', async (event) => {
-      event.preventDefault();
-  
-      const taskName = document.getElementById('taskName').value;
-      const taskDescription = document.getElementById('taskDescription').value;
-  
-      try {
-        const response = await fetch('http://localhost:3000/tasks', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: taskName,
-            description: taskDescription,
-            isFinished: false,
-          }),
-        });
-  
-        const newTask = await response.json();
-        console.log('Nueva tarea agregada:', newTask);
-  
-        // Crear un nuevo elemento de tarea y agregarlo al contenedor
-        const newTaskElement = createTaskElement(newTask);
-        tasksListContainer.appendChild(newTaskElement);
-      } catch (error) {
-        console.error('Error al agregar la tarea:', error);
-      }
-    });
-    
-    // Función para marcar o desmarcar una tarea como completada
-    window.completeTask = async (taskId, isFinished) => {
-      try {
-        await fetch(`http://localhost:3000/tasks/${taskId}/complete`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            isFinished: !isFinished,
-          }),
-        });
-  
-        loadTasks(); // Recargar las tareas
-      } catch (error) {
-        console.error('Error al cambiar el estado de la tarea:', error);
-      }
-    };
-    
-    // Función para eliminar una tarea
-    window.deleteTask = async (taskId, isFinished) => {
-      try {
-        await fetch(`http://localhost:3000/tasks/${taskId}`, { method: 'DELETE' });
-        loadTasks(); // Recargar las tareas
-      } catch (error) {
-        console.error('Error al cambiar el estado de la tarea:', error);
-      }
-    };
-    
-  // Cargar las tareas al cargar la página
-  loadTasks();
-});
-</script>
 </body>
 </html>

@@ -39,5 +39,7 @@ Representación visual del contenedor Nginx, crucial para el funcionamiento flui
 Captura de Postman para ilustrar la interacción con la API. La colección viene incluida en el proyecto.
 
 ## Web
-![web](images/web.png)
+<p align="center">
+  <img src="images/web.png"/>
+</p>
 Vista previa de la interfaz web del proyecto.

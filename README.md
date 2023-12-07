@@ -1,11 +1,15 @@
 # nodejs_api_tasks
 Aplicación API en Node JS junto a base de datos Mongo DB y una web para interactuar. Cuenta con 3 Dockerfile y un Docker-Compose para desplegar.
 
+## Ejecución
+- Usa el siguiente comando para ejecutar los contenedores: docker-compose up -d
+- Puedes probar las consultas de la API utilizando la colección de Postman "Tasks List.postman_collection.json".
+- La web se ejecuta en http://localhost:8080
+
 ## Estructura de Carpetas
 - 📁 **images**: Contiene imágenes que ilustran los diferentes contenedores y aspectos esenciales del proyecto.
 - 📁 **js**: Contiene el código JavaScript utilizado en la interfaz web.
 - 📁 **styles**: Almacena los estilos utilizados en la interfaz web.
-- 📁 **node_modules**: Directorio que contiene las dependencias del proyecto.
 
 ## Contenedores
 ### Contenedores
